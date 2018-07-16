@@ -127,15 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DirectXInit.cpp" />
+    <ClCompile Include="Direct2D.cpp" />
+    <ClCompile Include="DirectShader.cpp" />
+    <ClCompile Include="DirectString.cpp" />
+    <ClCompile Include="DirectX.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="WinApiInit.cpp" />
+    <ClCompile Include="WindowAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DirectXInit.h" />
-    <ClInclude Include="Init.h" />
+    <ClInclude Include="Direct2D.h" />
+    <ClInclude Include="DirectShader.h" />
+    <ClInclude Include="DirectString.h" />
+    <ClInclude Include="DirectX.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="WinApiInit.h" />
+    <ClInclude Include="WindowAPI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

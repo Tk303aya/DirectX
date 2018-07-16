@@ -1,9 +1,11 @@
 #include "main.h"
+#include "DirectX.h"
 
-void WinPro()
+bool MainLoopFunc()
 {
-
+  return true;
 }
+
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPWSTR lpCmdStr, int nCmd)
 {
@@ -13,14 +15,22 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPreInstance, LPWSTR lpCmdStr
   freopen("CONOUT$", "w", stdout); //標準出力をコンソールにする
   freopen("CONIN$", "r", stdin);   //標準入力をコンソールにする
 #endif
-  MSG msg = {};
-  HWND hWnd;
-  WNDCLASSEX wndcls = 
-  {
 
-  };
+  //WinAPIの初期化
+  if (winapi::WinApiInit(hInstance) == E_FAIL) return E_FAIL;
 
+  //DirectXの初期化
+  if (directx::DirectInit() == E_FAIL) return E_FAIL;
 
+  //実際にウィンドウを描画
+  ShowWindow(winapi::GetHwnd(), nCmd);
 
-  return msg.wParam;
+  //メインループ関数
+  winapi::MainLoop(MainLoopFunc);
+  
+  //DirectXの開放
+  directx::DirectRelease();
+
+  //通常終了
+  return winapi::SystemReturn();
 }
