@@ -27,7 +27,7 @@ HRESULT DirectInit()
       static_cast<UINT>(width),           //UINT                BackBufferWidth;              裏画面の横幅
       static_cast<UINT>(height),          //UINT                BackBufferHeight;             裏画面の縦幅
       D3DFMT_UNKNOWN,                     //D3DFORMAT           BackBufferFormat;             画面のフォーマット情報
-      1,                                  //UINT                BackBufferCount;              バックバッファの枚数
+      0,                                  //UINT                BackBufferCount;              バックバッファの枚数
                                           //                                                  
       D3DMULTISAMPLE_NONE,                //D3DMULTISAMPLE_TYPE MultiSampleType;              マルチサンプルの数を指定する
       0,                                  //DWORD               MultiSampleQuality;           マルチサンプルの品質レベル
@@ -79,12 +79,12 @@ bool ScreenStart()
   HRESULT hr;//失敗判定
   //裏画面の描画している情報を削除
   hr = direct_9_device->Clear(
-    0,                    //THIS_ DWORD Count,      下の矩形の数
-    NULL,                 //CONST D3DRECT* pRects,  クリアする矩形範囲　NULLは全てクリアする
-    D3DCLEAR_TARGET,      //DWORD Flags,            クリアするサーフェイスを示すフラグ　ステンシルバッファ、レンダリングターゲット、深度バッファがあり複数指定できる
-    D3DCOLOR_XRGB(0,0,0), //D3DCOLOR Color,         レンダリングターゲットをクリアするカラー
-    1.0f,                 //float Z,                深度バッファをクリアする値
-    0                     //DWORD Stencil           ステンシルバッファをクリアする値
+    0,                                  //THIS_ DWORD Count,      下の矩形の数
+    NULL,                               //CONST D3DRECT* pRects,  クリアする矩形範囲　NULLは全てクリアする
+    D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, //DWORD Flags,            クリアするサーフェイスを示すフラグ　ステンシルバッファ、レンダリングターゲット、深度バッファがあり複数指定できる
+    D3DCOLOR_XRGB(50,100,250),          //D3DCOLOR Color,         レンダリングターゲットをクリアするカラー
+    1.0f,                               //float Z,                深度バッファをクリアする値
+    0                                   //DWORD Stencil           ステンシルバッファをクリアする値
   );
   if (FAILED(hr)) return false;
 

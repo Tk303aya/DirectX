@@ -2,10 +2,11 @@
 
 namespace directx
 {
+
 HRESULT Draw2D(LPDIRECT3DVERTEXBUFFER9 buffer, LPDIRECT3DTEXTURE9 texture)
 {
   //２D描画
-  HRESULT hr;
+  HRESULT hr = S_OK;
   //テクスチャをポリゴンに書き込む方法を設定
   //SetTexture　
   //    第一：ポリゴンに書き込むテクスチャのステージ番号、最大８つ登録できる
@@ -17,7 +18,7 @@ HRESULT Draw2D(LPDIRECT3DVERTEXBUFFER9 buffer, LPDIRECT3DTEXTURE9 texture)
   //    第一：計算式を指定するテクスチャステージ番号
   //    第二：設定するテクスチャステート　D3DTEXTURESTAGESTATETYPE列挙型参照
   //    第三：第二引数によって指定する値が異なる
-  
+
   //D3DTSS_COLORARG1  色の引数１（テクスチャ側）
   hr = GetDirectDevice()->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
   if (FAILED(hr)) return E_FAIL;
@@ -36,7 +37,7 @@ HRESULT Draw2D(LPDIRECT3DVERTEXBUFFER9 buffer, LPDIRECT3DTEXTURE9 texture)
   //D3DTSS_ALPHAARG2  アルファの引数２（ポリゴン側）
   hr = GetDirectDevice()->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE); // 板ポリのα値を利用
   if (FAILED(hr)) return E_FAIL;
-  
+
   // レンダリングステート
   //SetRenderState 
   //  第一：変更対象のデバイスステート変数　D3DRENDERSTATETYPE列挙型参照
@@ -59,10 +60,15 @@ HRESULT Draw2D(LPDIRECT3DVERTEXBUFFER9 buffer, LPDIRECT3DTEXTURE9 texture)
   hr = GetDirectDevice()->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
   if (FAILED(hr))return E_FAIL;
 
-  return S_OK;
+  //読み込んだテクスチャを削除する
+  GetDirectDevice()->SetTexture(0, NULL);
+  //設定したレンダリング設定をデフォルト値に戻す
+  GetDirectDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+  GetDirectDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_ONE);
+  GetDirectDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ZERO);
 }
 
-HRESULT Load2D(LPDIRECT3DTEXTURE9 *texture, LPCWSTR pass)
+HRESULT Load2D(LPDIRECT3DTEXTURE9 *texture, LPCTSTR pass)
 {
   //成功判定用
   HRESULT hr;
@@ -77,4 +83,11 @@ HRESULT Load2D(LPDIRECT3DTEXTURE9 *texture, LPCWSTR pass)
   *texture = tex;
   return S_OK;
 }
+
+void Release2D(LPDIRECT3DVERTEXBUFFER9 buffer, LPDIRECT3DTEXTURE9 texture)
+{
+  buffer->Release();
+  texture->Release();
+}
+
 }

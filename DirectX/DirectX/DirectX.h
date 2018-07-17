@@ -2,6 +2,8 @@
 #include "main.h"
 #include "DirectString.h"
 #include "Direct2D.h"
+#include "Direct3D.h"
+#include "DirectShader.h"
 
 namespace directx
 {

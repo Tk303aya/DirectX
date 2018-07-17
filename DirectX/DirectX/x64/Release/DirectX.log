@@ -1,8 +1,5 @@
-﻿  DirectX.cpp
-c:\users\tk303\source\repos\directx\directx\directx\directx.cpp(74): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-  コード生成しています。
-  7 of 45 functions (15.6%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  コード生成が終了しました。
-  DirectX.vcxproj -> C:\Users\Tk303\source\Repos\DirectX\DirectX\x64\Release\DirectX.exe
+﻿  DirectShader.cpp
+c:\users\g0121\source\repos\directx\directx\directx\directshader.cpp(132): error C2059: 構文エラー: '}'
+c:\users\g0121\source\repos\directx\directx\directx\directshader.cpp(132): error C2143: 構文エラー: ';' が '}' の前にありません。
+  main.cpp
+c:\users\g0121\source\repos\directx\directx\directx\main.cpp(24): warning C4244: '引数': 'double' から 'FLOAT' への変換です。データが失われる可能性があります。
